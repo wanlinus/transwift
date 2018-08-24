@@ -19,8 +19,8 @@ public class V1SystemController {
     List<Map<String, String>> sLang() {
         List<Map<String, String>> list = new ArrayList<>();
         for (LanguageEnum e : Arrays.asList(LanguageEnum.values())) {
-            Map<String, String> map = new HashMap<>();
-            map.put("shorhand", e.getShorthand());
+            Map<String, String> map = new HashMap<>(16);
+            map.put("shorthand", e.getShorthand());
             map.put("name", e.getName());
             list.add(map);
         }

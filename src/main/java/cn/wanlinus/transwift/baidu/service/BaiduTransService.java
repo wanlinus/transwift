@@ -35,14 +35,21 @@ public class BaiduTransService {
 
     @Value("${baidu.secretKey}")
     private String secretKey;
+    /**
+     * 通用翻译API
+     */
     private final String url = "http://api.fanyi.baidu.com/api/trans/vip/translate";
+    /**
+     * 定制化翻译api
+     */
+//    private final String url = "http://api.fanyi.baidu.com/api/trans/private/translate";
 
     @Autowired
     private RestTemplate restTemplate;
 
     /**
-     * @param data
-     * @return
+     * @param data 需要翻译的数据
+     * @return 译文
      */
     public List<Result> trans(TransFormData data) {
         String salt = String.valueOf(System.currentTimeMillis());
@@ -59,6 +66,7 @@ public class BaiduTransService {
         httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(map, httpHeaders);
         ResponseEntity<BaiduTransResponseData> response = restTemplate.postForEntity(url, requestEntity, BaiduTransResponseData.class);
+        logger.info(response.toString());
         return Optional.ofNullable(response.getBody()).map(BaiduTransResponseData::getTrans_result).orElse(Collections.emptyList());
     }
 

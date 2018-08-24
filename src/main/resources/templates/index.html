@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Transwft</title>
+    <title>Transwift</title>
 </head>
 <body>
 <select hidden>
@@ -16,10 +16,11 @@
 </select>
 目标
 <select name="" id="to">
-</select>
+</select><br/>
 <input type="text" id="content">
 
 <button id="go">翻译</button>
+<br/>
 <span id="dst"></span>
 </body>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
@@ -29,6 +30,7 @@
             url: "/v1/froms",
             success: function (data) {
                 if (data != null) {
+                    console.log(data);
                     for (let i = 0; i < data.length; i++) {
                         $("#from").append($('<option>', {value: data[i].shorthand, text: data[i].name}))
                         $("#to").append($('<option>', {value: data[i].shorthand, text: data[i].name}))
