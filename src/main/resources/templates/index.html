@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Transwft</title>
+</head>
+<body>
+<select hidden>
+    <option value="baidu">Baidu</option>
+</select>
+源:
+<select name="" id="from">
+</select>
+目标
+<select name="" id="to">
+</select>
+<input type="text" id="content">
+
+<button id="go">翻译</button>
+<span id="dst"></span>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        $.get({
+            url: "/v1/froms",
+            success: function (data) {
+                if (data != null) {
+                    for (let i = 0; i < data.length; i++) {
+                        $("#from").append($('<option>', {value: data[i].shorthand, text: data[i].name}))
+                        $("#to").append($('<option>', {value: data[i].shorthand, text: data[i].name}))
+                    }
+                }
+            }
+        });
+        $("#go").click(function () {
+            $.post({
+                url: "/v1/baidu/trans",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    from: $("#from").val(),
+                    to: $("#to").val(),
+                    content: $("#content").val()
+                }),
+                success: function (data) {
+                    $("#dst").text(data[0].dst);
+                }
+
+            })
+        });
+
+    })
+</script>
+</html>
