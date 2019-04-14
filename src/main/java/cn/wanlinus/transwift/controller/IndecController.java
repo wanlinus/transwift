@@ -16,7 +16,7 @@ public class IndecController {
     
     @GetMapping("/a")
     public String iddd(){
-        return "asdsad";
+        return "asdsadsdsd";
     }
 
 }
