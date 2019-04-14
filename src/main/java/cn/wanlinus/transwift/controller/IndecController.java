@@ -13,4 +13,10 @@ public class IndecController {
     public String index() {
         return "index";
     }
+    
+    @GetMapping("/a")
+    public String iddd(){
+        return "asdsad";
+    }
+
 }
